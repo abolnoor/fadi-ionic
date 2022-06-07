@@ -1,0 +1,7 @@
+{
+  "name": "fadi-ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
