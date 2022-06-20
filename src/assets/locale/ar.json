@@ -1,0 +1,14 @@
+{
+  "locale": "ar",
+  "translations": {
+    "introductionHeader": " مرحبا i18n! ",
+    "5206857922697139278": "I don't output any element",
+    "392942015236586892": "Angular logo",
+    "updatedMinutes": "Updated {$ICU}",
+    "2002272803511843863": "{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {{INTERPOLATION} minutes ago}}",
+    "genderAuther": "The author is {$ICU}",
+    "7670372064920373295": "{VAR_SELECT, select, male {male} female {female} other {other}}",
+    "genderAuther2": " by {$ICU}",
+    "introductionPage2": " Welcome to Second Page "
+  }
+}

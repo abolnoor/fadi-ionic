@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Fadi App
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-label>Language</ion-label>
+      <ion-select  [(ngModel)]="langs._currentLangId" (ionChange)="langs.switchLanguage($event)" interface="popover">
+        <ion-select-option *ngFor="let language of langs.languages" [value]="language" >{{language}}</ion-select-option>
+      </ion-select>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="site-out">
+
+<ion-router-outlet></ion-router-outlet>
+</ion-content>

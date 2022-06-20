@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  { path: 'en', loadChildren: () => import('./site/site-en.module').then(m => m.SiteEnModule) }, 
+  { path: 'ar', loadChildren: () => import('./site/site-ar.module').then(m => m.SiteArModule) }, 
+  { path: 'fr', loadChildren: () => import('./site/site-fr.module').then(m => m.SiteFrModule) }, 
+  { path: '**', redirectTo: 'en' },  // redirecting to default route in case of any other prefix
+];
+const routesProd: Routes = [
+  { path: '**', loadChildren: () => import('./site/site.module').then(m => m.SiteModule) }
 ];
 
 @NgModule({

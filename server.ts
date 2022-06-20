@@ -1,3 +1,7 @@
+/***************************************************************************************************
+ * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
+ */
+import '@angular/localize/init';
 import 'zone.js/dist/zone-node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
@@ -7,17 +11,22 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { LOCALE_ID } from '@angular/core';
 
 // The Express app is exported so that it can be used by serverless Functions.
-export function app(): express.Express {
+export function app(lang?: string): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'www');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
-
+  const langCodeMap={
+    "en": "en-US",
+    "ar": "ar-EG",
+    "fr": "fr-FR"
+  }
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
-    bootstrap: AppServerModule,
-  }));
+    bootstrap: AppServerModule
+  } as any));
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
@@ -42,6 +51,17 @@ function run(): void {
 
   // Start up the Node server
   const server = app();
+
+  // const appFr = app('fr');
+  // const appAr = app('ar');
+  // const appEn = app('en');
+  // const server = express();
+  // server.use('/fr', appFr);
+  // server.use('/ar', appAr);
+  // server.use('/en', appEn);
+  // server.use('', appEn);
+
+
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
