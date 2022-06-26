@@ -6,13 +6,13 @@ import 'zone.js/dist/zone-node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
+import axios from 'axios';
 import { join } from 'path';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { LOCALE_ID } from '@angular/core';
-
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(lang?: string): express.Express {
   const server = express();
@@ -39,6 +39,14 @@ export function app(lang?: string): express.Express {
   }));
 
   // All regular routes use the Universal engine
+  server.get(['/main-sitemap.xml', '/sitemap.xml', '/sitemap-:ind([1-9]+).xml'],  async (req, res) => {    
+    const response = await axios.get( 
+      `https://emenu-prod-api.azurewebsites.net/api/app/feed/398b2f1f-846c-89b8-64e9-39ff1119903c/${req.url}`
+    ); 
+    res.header("Content-Type", "application/xml"); 
+    res.status(200).send(response.data); 
+  });
+
   server.get('*', (req, res) => {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });

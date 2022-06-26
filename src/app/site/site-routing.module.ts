@@ -16,6 +16,10 @@ const routesChildren: Routes = [
   {
     path: 'second',
     loadChildren: () => import('./pages/second/second.module').then(m => m.SecondPageModule)
+  },
+  {
+    path: 'sitemap',
+    loadChildren: () => import('./pages/sitemap/sitemap.module').then( m => m.SitemapPageModule)
   }
 ];
 

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
+import { XmlPipe } from '../xml.pipe';
 
 @NgModule({
   declarations: [SiteComponent],
